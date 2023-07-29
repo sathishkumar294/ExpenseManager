@@ -49,6 +49,9 @@ fun TransactionsList() {
         TransactionDate(Date(), 20, 10)
         Transaction("Food", "Dinner at KFC", 10)
         Transaction("Food", "Dinner at KFC", 20, false)
+        TransactionDate(Date(), 20, 10)
+        Transaction("Food", "Dinner at KFC", 10)
+        Transaction("Food", "Dinner at KFC", 20, false)
     }
 }
 
