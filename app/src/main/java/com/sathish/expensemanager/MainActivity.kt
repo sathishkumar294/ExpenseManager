@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.toColorInt
 import com.sathish.expensemanager.ui.theme.ExpenseManagerTheme
-import java.text.SimpleDateFormat
+import java.text.DateFormat
 import java.util.Date
 
 class MainActivity : ComponentActivity() {
@@ -34,8 +34,7 @@ class MainActivity : ComponentActivity() {
             ExpenseManagerTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
                 ) {
                     TransactionsList()
                 }
@@ -77,15 +76,14 @@ fun Transaction(category: String, title: String, amount: Int, isExpense: Boolean
         verticalAlignment = Alignment.CenterVertically
     ) {
         Category(category)
-        Description(title, Modifier)
+        Description(title)
         Amount(amount, isExpense)
     }
 }
 
 @Composable
 private fun Amount(amount: Int, isExpense: Boolean, fontSize: TextUnit = 12.sp) {
-    val color =
-        if (isExpense) MaterialTheme.colorScheme.error else Color("#008800".toColorInt())
+    val color = if (isExpense) MaterialTheme.colorScheme.error else Color("#008800".toColorInt())
     Text(
         text = amount.toString(),
         color = color,
@@ -95,12 +93,12 @@ private fun Amount(amount: Int, isExpense: Boolean, fontSize: TextUnit = 12.sp) 
 }
 
 @Composable
-private fun RowScope.Description(title: String, modifier: Modifier.Companion = Modifier) {
+private fun RowScope.Description(title: String) {
     Text(
         text = title,
         color = MaterialTheme.typography.headlineMedium.color,
         fontSize = 11.sp,
-        modifier = modifier
+        modifier = Modifier
             .weight(3F)
             .padding(start = 16.dp)
     )
@@ -109,18 +107,16 @@ private fun RowScope.Description(title: String, modifier: Modifier.Companion = M
 @Composable
 private fun Category(category: String, fontSize: TextUnit = 12.sp) {
     Text(
-        text = category,
-        color = MaterialTheme.colorScheme.secondary,
-        fontSize = fontSize
+        text = category, color = MaterialTheme.colorScheme.secondary, fontSize = fontSize
     )
 }
 
 @Composable
 private fun DateText(date: Date, fontSize: TextUnit = 12.sp) {
     Text(
-        text = SimpleDateFormat("dd-MMM-yyyy").format(date),
-        color = MaterialTheme.colorScheme.secondary,
-        fontSize = fontSize
+        text = DateFormat.getDateInstance()
+            .format(date),//SimpleDateFormat("dd-MMM-yyyy").format(date.toInstant()) ,
+        color = MaterialTheme.colorScheme.secondary, fontSize = fontSize
     )
 }
 
